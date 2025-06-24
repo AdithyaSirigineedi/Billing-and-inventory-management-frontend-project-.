@@ -1,0 +1,81 @@
+.add-job-container {
+  max-width: 650px;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add-job-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 28px;
+  color: #333;
+}
+
+.job-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.job-form label {
+  font-weight: 600;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+}
+
+.job-form input,
+.job-form textarea {
+  padding: 0.75rem;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.job-form input:focus,
+.job-form textarea:focus {
+  border-color: #7e57c2;
+  box-shadow: 0 0 0 3px rgba(126, 87, 194, 0.2);
+  outline: none;
+}
+
+.job-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.job-form button {
+  padding: 0.9rem;
+  background-color: #7e57c2;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.job-form button:hover {
+  background-color: #673ab7;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 500px) {
+  .add-job-container {
+    padding: 1.5rem;
+  }
+
+  .add-job-container h2 {
+    font-size: 24px;
+  }
+
+  .job-form button {
+    font-size: 16px;
+  }
+}
