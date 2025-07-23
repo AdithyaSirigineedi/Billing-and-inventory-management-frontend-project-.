@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import '../css/cart.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
-
 
 
   useEffect(() => {
@@ -32,36 +33,32 @@ const Cart = () => {
     return total + price;
   }, 0).toFixed(2);
 
-  // i have used demo key for razor pay //
-
   const onRazorPayClick = () => {
     if (!razorpayLoaded) {
-      alert("Razorpay SDK not yet loaded. Please try again.");
+      toast.error("Razorpay SDK not yet loaded. Please try again.");
       return;
   }
-   const options = {
-      key: "rzp_test_1DP5mmOlF5G5ag",  // key for testing purpose //
-      amount: "50000",
-      currency: "INR",
-      name: "Acme Corp",
-      description: "Test Transaction",
-      image: "https://example.com/your_logo",
-      order_id: "order_TEST1234567890",
-      callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
-      
-      prefill: {
-        name: "Gaurav Kumar",
-        email: "gaurav.kumar@example.com",
-        contact: "9000090000",
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-
+  const options = {
+  key: "rzp_test_1DP5mmOlF5G5ag", 
+  amount: Math.round(totalPrice * 86 * 100),
+  currency: "INR",
+  name: cartItems.map(item => item.productname).join(', '),
+  description: "Test Transaction",
+  image: "https://your-logo-url.com",
+  handler: function (response) {
+    toast.success("Payment ID: " + response.razorpay_payment_id);
+    toast.success("Order ID: " + response.razorpay_order_id);
+    toast.success("Signature: " + response.razorpay_signature);
+  },
+  prefill: {
+    name: "Demo User",
+    email: "Demo@gmail.com",
+    contact:"1234567891",
+  },
+  theme: {
+    color: "#3399cc",
+  },
+};
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
 }
@@ -94,7 +91,20 @@ const Cart = () => {
           </div>
         </div>
       )}
+         <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+/>
     </div>
+
   );
 };
 export default Cart;
