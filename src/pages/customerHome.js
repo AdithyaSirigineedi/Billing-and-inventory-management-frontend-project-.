@@ -7,8 +7,11 @@ import ProfileLogo from '../images/profile.lottie';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import productDetails from '../data/data.js';
 import CartLogo from '../images/shopping-cart.svg';
+import { Card,Button } from 'antd';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
-
+ 
 const CustomerHome = () => {
     const navigate = useNavigate();
     const [showDropdown, setShowDropdown] = useState(false);
@@ -124,25 +127,37 @@ const CustomerHome = () => {
                 </ul>
             </header>
             <div className="products-container">
-                <div className="product-list">
-                    {
-                        products && products.length > 0 &&
-                        products.map((product) => (
-                            <div className="product-item" key={product.id}>
-                                <h3>{product.productname}</h3>
-                                {product.productimage ? <img src={product.productimage} alt={product.productname} className="images" /> : " "}
-                                <p>{product.productprice}</p>
-                                <p>{product.productdescription}</p>
-                                <button
-                                    className="add-button"
-                                    type="button"
-                                    onClick={() => onAddToCart(product.id)} style={{ color: 'black;' }}
-                                >Add to cart
-                                </button>
-                            </div>
-                        ))}
-                </div>
-            </div>
+  <div className="product-list">
+    {
+      products && products.length > 0 &&
+      products.map((product) => (
+        <Card
+          key={product.id}
+          title={product.productname}
+          style={{ width: 300 }}
+          cover={
+            product.productimage && (
+              <img
+                alt={product.productname}
+                src={product.productimage}
+                style={{ height: 200, objectFit: 'cover' }}
+              />
+            )
+          }
+          actions={[
+            <Button type="primary" onClick={() => onAddToCart(product.id)} key="add" 
+            style={{ backgroundColor: '#d7aaff', color: 'black',fontWeight: 'bold',width:'60%' }}>
+              Add to Cart
+            </Button>
+          ]}
+        >
+          <p><strong>Price:</strong> {product.productprice}</p>
+          <p>{product.productdescription}</p>
+        </Card>
+      ))
+    }
+  </div>
+</div>
             <section className="faq-section">
                 <div className="faq-left">
                     <p className="faq-subheading">F.A.Q</p>
@@ -210,6 +225,18 @@ const CustomerHome = () => {
                     <p>&copy; {new Date().getFullYear()} VendorHub. All rights reserved.</p>
                 </div>
             </footer>
+            <ToastContainer
+                position="top-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+/>
 
         </>
     )
