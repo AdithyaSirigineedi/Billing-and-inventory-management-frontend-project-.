@@ -31,9 +31,8 @@ A responsive frontend application built using **React.js** to simulate a basic i
 
 Follow these steps to run the project locally:
 
-```bash
 # Clone the repository
-git clone https://github.com/your-username/billing-inventory-system.git
+git clone https://github.com/AdithyaSirigineedi/Billing-and-inventory-management-frontend-project-..git
 cd billing-inventory-system
 
 # Install dependencies
